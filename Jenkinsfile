@@ -10,14 +10,14 @@ node {
     }
 
     stage('Push image') {
-        withDockerRegistry([ credentialsId: "dockerhub", url: "https://hub.docker.com" ]) {
+        withDockerRegistry([ credentialsId: "dockerHub", url: "https://hub.docker.com" ]) {
         app.push()
         app.push("latest")
     }
     }
 
     stage('Deploy') {
-        sh ("docker run -d -p 3333:3333 ${dockerhubaccountid}/${application}:${BUILD_NUMBER}")
+        sh ("docker run -d -p 80:80 ${dockerhubaccountid}/${application}:${BUILD_NUMBER}")
     }
 
     stage('Remove old images') {
