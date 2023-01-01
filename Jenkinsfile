@@ -1,5 +1,5 @@
 node {
-    def application = "pythonapp"
+    def application = "mynginx"
     def dockerhubaccountid = "mandheit"
     stage('Clone repository') {
         checkout scm
@@ -17,6 +17,8 @@ node {
     }
 
     stage('Deploy') {
+        sh ("docker stop ${dockerhubaccountid}/${application}:${BUILD_NUMBER}")
+        sh ("docker rm ${dockerhubaccountid}/${application}:${BUILD_NUMBER}")
         sh ("docker run -d -p 80:80 ${dockerhubaccountid}/${application}:${BUILD_NUMBER}")
     }
 
