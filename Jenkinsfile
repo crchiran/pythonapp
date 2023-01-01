@@ -10,7 +10,7 @@ node {
     }
 
     stage('Push image') {
-        withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+        withDockerRegistry([ credentialsId: "dockerHub", url: "https://hub.docker.com" ]) {
         app.push()
         app.push("latest")
     }
