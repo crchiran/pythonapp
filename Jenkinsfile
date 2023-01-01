@@ -16,9 +16,6 @@ node {
     }
     }
 
-    stage('Deploy_stop_container') {
-        sh ("docker stop ${dockerhubaccountid}/${application}:${BUILD_NUMBER}")
-    }
     stage('Deploy_remove_container') {
         sh ("docker rm ${dockerhubaccountid}/${application}:${BUILD_NUMBER}")
     }
